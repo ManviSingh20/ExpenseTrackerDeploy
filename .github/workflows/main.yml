@@ -83,6 +83,7 @@ jobs:
       - name: Configure kubeconfig
         run: |
           aws eks --region ap-south-1 update-kubeconfig --name my-eks-cluster
+
       - name: Checkout code
         uses: actions/checkout@v2
 
