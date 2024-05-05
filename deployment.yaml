@@ -1,25 +1,19 @@
-apiVersion: apps/v1beta1
-kind: deployment
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: mern-app-deployment
-  labels:
-    app: mern-app
+  name: backend-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: mern-app
+      app: backend
   template:
     metadata:
       labels:
-        app: mern-app
+        app: backend
     spec:
       containers:
-        - name: frontend
-          image: priyanshcchoudhary/expensetracker-main-frontend:latest
-          ports:
-            - containerPort: 3000
-        - name: backend
-          image: priyanshcchoudhary/expensetracker-main-backend:latest
-          ports:
-            - containerPort: 5000
+      - name: backend
+        image: priyanshcchoudhary/expensetracker-main-backend:latest
+        ports:
+        - containerPort: 5000
