@@ -1,17 +1,25 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: mern-app-pod
+  name: mern-app-deployment
 spec:
   replicas: 2
-  nodeSelector:
-    node-group: ETNodeGroup
-  containers:
-    - name: frontend
-      image: priyanshcchoudhary/expensetracker-main-frontend:latest
-      ports:
-        - containerPort: 3000
-    - name: backend
-      image: priyanshcchoudhary/expensetracker-main-backend:latest
-      ports:
-        - containerPort: 5000
+  selector:
+    matchLabels:
+      app: mern-app
+  template:
+    metadata:
+      labels:
+        app: mern-app
+    spec:
+      nodeSelector:
+        node-group: ETNodeGroup
+      containers:
+        - name: frontend
+          image: priyanshcchoudhary/expensetracker-main-frontend:latest
+          ports:
+            - containerPort: 3000
+        - name: backend
+          image: priyanshcchoudhary/expensetracker-main-backend:latest
+          ports:
+            - containerPort: 5000
