@@ -62,7 +62,6 @@ jobs:
 
   Configure-Kubectl-and-Apply-Deployment:
     runs-on: ubuntu-latest
-    needs: [Provision-EKS]
   
     steps:
 
@@ -80,15 +79,14 @@ jobs:
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-
       - name: Configure kubeconfig
         run: |
           aws eks --region ap-south-1 update-kubeconfig --name my-eks-cluster
-
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Apply Kubernetes Deployment
         run: |
-          kubectl apply -f deployment.yaml
+          kubectl apply -f frontend-deployment.yaml
+          kubectl apply -f backend-deployment.yaml
           kubectl apply -f service.yaml
