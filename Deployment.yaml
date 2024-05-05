@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mern-app-deployment
+  labels:
+    app: mern-app
 spec:
   replicas: 2
   selector:
@@ -12,8 +14,6 @@ spec:
       labels:
         app: mern-app
     spec:
-      nodeSelector:
-        node-group: ETNodeGroup
       containers:
         - name: frontend
           image: priyanshcchoudhary/expensetracker-main-frontend:latest
